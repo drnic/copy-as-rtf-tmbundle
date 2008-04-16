@@ -23,7 +23,7 @@ Credit
 
 This bundle was created by [Max Muermann](http://www.workingwithrails.com/person/8530-max-muermann)
 
-Its now hosted on github by Dr Nic Williams so it can live on.
+Its now hosted on github by [Dr Nic Williams](http://drnicwilliams.com) so it can live on.
 
 License
 =======
