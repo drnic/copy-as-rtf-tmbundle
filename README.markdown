@@ -13,7 +13,7 @@ paste it directly into Keynote presentations. And other places where RTF is supp
 Installation
 ============
 
-    cd ~/"Library/Application Support/TextMate/Bundles"
+    cd ~/Library/Application\ Support/TextMate/Bundles
     git clone git://github.com/drnic/copy-as-rtf-tmbundle.git "Copy as RTF.tmbundle"
     
 Inside TextMate, click "Reload Bundles."
