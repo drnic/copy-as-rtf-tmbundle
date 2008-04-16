@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby -rjcode -Ku
+require "#{ENV['TM_BUNDLE_SUPPORT']}/lib/copy_as_rtf.rb"
+require "#{ENV['TM_SUPPORT_PATH']}/lib/progress.rb"
+doc = RtfExporter.new.generate_rtf( STDIN.read )
+Kernel.open('|pbcopy','w+') do |f|
+  f.write(doc)
+end
+print doc
+</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>inputFormat</key>
+	<string>xml</string>
+	<key>keyEquivalent</key>
+	<string>^~@r</string>
+	<key>name</key>
+	<string>Copy as RTF</string>
+	<key>output</key>
+	<string>discard</string>
+	<key>uuid</key>
+	<string>6F9D791B-B8E5-456D-A574-1B5C71F232FF</string>
+</dict>
+</plist>
