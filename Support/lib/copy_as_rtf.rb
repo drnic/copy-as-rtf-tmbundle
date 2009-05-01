@@ -66,7 +66,7 @@ class RtfExporter
     # Load the active theme. Unfortunately, this requires us to scan through
     # all discoverable theme files...
     unless theme_plist = find_theme(theme_uuid)
-      print "Could not locate your theme file!"
+      print "Could not locate your theme file or it may be corrupt or unparsable!"
       abort
     end
 
@@ -149,8 +149,12 @@ RTF_DOC
       if File.exists? theme_dir
         themes = Dir.entries(theme_dir).find_all { |theme| theme =~ /.+\.(tmTheme|plist)$/ }
         themes.each do |theme|
-          plist = OSX::PropertyList.load(File.open("#{theme_dir}/#{theme}"))
-          return plist if plist["uuid"] == uuid
+          begin
+            plist = OSX::PropertyList.load(File.open("#{theme_dir}/#{theme}"))
+            return plist if plist["uuid"] == uuid
+          rescue OSX::PropertyListError => e
+            # puts "Error parsing theme #{theme_dir}/#{theme}" - e.g. GitHub.tmTheme has issues
+          end
         end
       end
     end
