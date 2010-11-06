@@ -61,7 +61,7 @@ class RtfExporter
 
     # Load TM preferences to discover the current theme and font settings
     textmate_pref_file = '~/Library/Preferences/com.macromates.textmate.plist'
-    prefs = PropertyList.load(File.open(File.expand_path(textmate_pref_file)))
+    prefs = OSX::PropertyList.load(File.open(File.expand_path(textmate_pref_file)))
     theme_uuid = prefs['OakThemeManagerSelectedTheme']
     # Load the active theme. Unfortunately, this requires us to scan through
     # all discoverable theme files...
