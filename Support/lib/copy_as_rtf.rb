@@ -178,7 +178,7 @@ RTF_DOC
   def document_to_rtf(input, opt = {})
     # Read the source document / selection
     # Convert tabs to spaces using configured tab width
-    input = detab(input, (ENV['TM_TAB_SIZE'] || '8').to_i)
+    input = detab(input, (ENV['TM_TAB_SIZE'] || '2').to_i)
 
     input.gsub! /\\/, "__backslash__"
     input.gsub! /\\n/, "__newline__"
