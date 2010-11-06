@@ -84,10 +84,12 @@ class RtfExporter
     
     @font_name = '"' + @font_name + '"' if @font_name.include?(' ') &&
       !@font_name.include?('"')
+      
 
     theme_plist['settings'].each do | setting |
       if (!setting['name'] and setting['settings'])
         body_bg = setting['settings']['background'] || '#ffffff'
+        @body_bg ||= body_bg
         body_fg = setting['settings']['foreground'] || '#000000'
         selection_bg = setting['settings']['selection']
         body_bg = hex_color_to_rtf(body_bg)
@@ -250,16 +252,14 @@ RTF_DOC
   
   def push_style name
     cur = current_style
-    # p "getting #{name}"
     new_style = get_style_recursive(name.split('.'), @styles)
-    # p "got #{new_style.inspect}"
     # p "current: #{cur.inspect}"
     new_style = cur.merge new_style if new_style
     new_style ||= cur || {}
     unless new_style[:color_index]
-      new_style[:color_index] = 0 #45 # works for Sunburst theme; 0 for Eiffle or IDLE theme
+      #45 works for Sunburst theme; 0 for Eiffle or IDLE theme
+      new_style[:color_index] = (@body_bg == '#000000') ? 45 : 0
     end
-    # p "merged: #{new_style.inspect}"
     @style_stack.unshift new_style
     new_style
   end
